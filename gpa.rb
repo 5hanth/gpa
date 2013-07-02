@@ -1,14 +1,28 @@
 require 'gtk2'
 window  = Gtk::Window.new
-window.resizable =false
+window.title = "GPA Calculator for Anna University"
+window.resizable = false
 window.window_position = Gtk::Window::POS_CENTER
-base = Gtk::VBox.new(false,0) 
+base = Gtk::VBox.new(false,10) 
 
 image = Gtk::Image.new(value = "logo.png")
 
 # semester_$list
-semester_list = Gtk::HBox.new(false,0)
+semester_list = Gtk::HBox.new(false,5)
 
+department = Gtk::Label.new
+department.set_markup("<b>Department :</b> ")
+$departments = [ 
+		"Computer Science and Engineering",
+		"Information Technology",
+		"Electronics and Communication Engineering",
+		"Mechanical Engineering",
+		"Electrical and Electronics Engineering" ]
+
+$department_list = Gtk::ComboBox.new(is_text_only = true)
+$departments.each do |yessssss|
+	$department_list.append_text yessssss
+	end
 name = Gtk::Label.new
 name.set_markup("<b>Semester :</b> ")
 ## combobox for semester_$list
@@ -17,23 +31,26 @@ $list = Gtk::ComboBox.new(is_text_only = true)
 $list.append_text blah.to_s
 end
 
+$department_list.active = $list.active = 0
+label_group =  Gtk::VBox.new(false,0)
+list_group =  Gtk::VBox.new(false,0)
+
+[department,name].each do |shit|
+label_group.pack_end(shit,true,true,0)
+end
+[$department_list,$list].each do |crap|
+list_group.pack_start(crap, true, true, 0)
+end
 # Get Button
 go = Gtk::Button.new("Go")
 
 # pack semester label and combobox
-[name,$list,go].each do |blah| 
+[label_group,Gtk::VSeparator.new,list_group,Gtk::VSeparator.new].each do |blah| 
 semester_list.pack_start(blah,true,true,0)
 end
-# title line 
-title = Gtk::HBox.new(false,0)
-["Subject","Credicts","Grade"].each do |s|
-title.pack_start(Gtk::Label.new(s,true),true,true,0)
-end
-
-
 
 # pack logo, semester_$list, subjects and :P
-[image,semester_list].each do |blah|
+[image,semester_list,go].each do |blah|
 base.pack_start(blah,true,true,0)
 end
 
@@ -73,6 +90,11 @@ end
 
 def show_subjects
 subjects_window = Gtk::Window.new
+subjects_window.modal = true
+subjects_window.destroy_with_parent = true
+subjects_window.title = "Choose Your Grade in each Subject:"
+subjects_window.resizable = false
+
 content = Gtk::Table.new(2, 3, true)
 subjects = Gtk::VBox.new(false,0)
 credicts = Gtk::VBox.new(false,0)
