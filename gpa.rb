@@ -98,13 +98,32 @@ calculate = Gtk::Button.new("Calculate GPA")
 content.attach(calculate,0,3,1,2)
 subjects_window.add(content)
 subjects_window.show_all
-ans ="blah" 
+  
 calculate.signal_connect('clicked') do
+points = {}
+sum = 0.0
+total = 0.0
+grade.keys.each do |damn|
+case grade[damn].active_text
+                 when 'A'  then  points[damn]= 9
+                 when 'B'  then  points[damn]= 8
+                 when 'C'  then  points[damn]= 7
+                 when 'D'  then  points[damn]= 6
+                 when 'E'  then  points[damn]= 5
+                 when 'S'  then  points[damn]= 10
+		 end
+	end
+                           
+$semester[sem].keys.each do |cool|
+total  += $semester[sem][cool]*points[cool]
+sum += $semester[sem][cool]
+end
+
 dialog = Gtk::MessageDialog.new( subjects_window,
 				Gtk::MessageDialog::DESTROY_WITH_PARENT,
 				Gtk::MessageDialog::INFO,
 				Gtk::MessageDialog::BUTTONS_OK,
-				message="Your GPA is #{ans} !")
+				message="Your GPA is #{total/sum} !")
 
 dialog.signal_connect('response') do
 dialog.destroy
