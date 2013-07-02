@@ -72,7 +72,7 @@ show_subjects
 end
 
 def show_subjects
-subjects_window = Gtk::Window.new()
+subjects_window = Gtk::Window.new
 content = Gtk::Table.new(2, 3, true)
 subjects = Gtk::VBox.new(false,0)
 credicts = Gtk::VBox.new(false,0)
@@ -87,6 +87,7 @@ $semester[sem].keys.each do |blah|
 	["S","A","B","C","D","E"].each do |yeah|
  	grade[blah].append_text yeah
 	end
+	grade[blah].active = 0
 	grades.pack_start(grade[blah],true,true,0)
 	
 end
@@ -97,6 +98,21 @@ calculate = Gtk::Button.new("Calculate GPA")
 content.attach(calculate,0,3,1,2)
 subjects_window.add(content)
 subjects_window.show_all
+ans ="blah" 
+calculate.signal_connect('clicked') do
+dialog = Gtk::MessageDialog.new( subjects_window,
+				Gtk::MessageDialog::DESTROY_WITH_PARENT,
+				Gtk::MessageDialog::INFO,
+				Gtk::MessageDialog::BUTTONS_OK,
+				message="Your GPA is #{ans} !")
+
+dialog.signal_connect('response') do
+dialog.destroy
+end
+
+
+dialog.run
+end
 end
 
 window.add(base)
