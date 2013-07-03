@@ -69,9 +69,9 @@ $semester = {
 		"Software Engineering"				=> 3,
 		"Discrete Mathematics"				=> 4,
 		"Computer Networks"				=> 3,
-		"Theory of Computation"			=> 4,
+		"Theory of Computation"				=> 4,
 		"System Software"				=> 4,
-		"Programming Paradigms"			=> 3,
+		"Programming Paradigms"				=> 3,
 		"Network Lab"					=> 2,
 		"System Software Lab"				=> 2,
 		"Java Lab"					=> 2	},
@@ -93,14 +93,8 @@ $semester = {
 		"Digital Signal Processing"			=> 3,
 		"Elective III"					=> 3,
 		"Elective IV"					=> 3,
-		"Computer Graphics Lab"			=> 2,
+		"Computer Graphics Lab"				=> 2,
 		"Open Source Lab"				=> 2	},
-	8 => {
-		"Elective V"	=> 3,
-		"Elective VI"	=> 3,
-		"Project Work"	=> 6	}
-
-
 		},
 "Information Technology" => {
 	2 => common_to_cse_it_ece,
@@ -153,13 +147,6 @@ $semester = {
 		"Elective III"					=> 3,
 		"Service Oriented Architecture Lab"		=> 2,
 		"Computer Graphics Lab"				=> 2	},
-
-	8 => {
-		"Elective IV"	=> 3,
-		"Elective V"	=> 3,
-		"Project Work"	=> 6	}
-
-
 	},
 "Electronics and Communication Engineering" => {
 	2 => common_to_cse_it_ece,
@@ -169,10 +156,49 @@ $semester = {
 		"Data Structures and Object Oriented Programming in C++"  	=> 3,
 		"Digital Electronics"						=> 4,
 		"Signals and systems"						=> 4,
-		"Electronic Circuits"						=> 4,
+		"Electronic Circuits I"						=> 4,
 		"Digital Electronics Lab"					=> 2,
 		"Electronic Circuits Lab I"					=> 2,
-		"Data structures and Object Oriented Programming Lab"		=> 2	}
+		"Data structures and Object Oriented Programming Lab"		=> 2	},
+	4 => {
+		"Probability and Random Processes"		=> 4,
+		"Electronic Circuits II"			=> 4,
+		"Communication Theory"				=> 4,
+		"Electromagnetic Fields"			=> 4,
+		"Linear Integrated Circuits"			=> 3,
+		"Control Systems"				=> 3,
+		"Electronics circuits II and simulation Lab"	=> 2,
+		"Linear Integrated Circuit Lab"			=> 2,
+		"Electrical Engineering and Control System Lab"	=> 2	},
+	5 => {
+		"Digital Communication"				=> 3,
+		"Digital Signal Processing"			=> 4,
+		"Computer Architecture and Organization"	=> 3,
+		"Transmission Lines and Wave guides"		=> 4,
+		"Environmental Science and Engineering"		=> 3,
+		"Microprocessors and Microcontrollers"		=> 4,
+		"Digital Signal Processing Lab"			=> 2,
+		"Communication System Lab"			=> 2,
+		"Microprocessors and Microcontrollers Lab"	=> 2	},
+	6 => {
+		"Principles of Management"		=> 3,
+		"Measurements and Instrumentation"	=> 3,
+		"Computer Networks"			=> 3,
+		"Antenna and Wave Propagation"		=> 4,
+		"VLSI Design"				=> 3,
+		"Elective I"				=> 3,
+		"Computer Networks Lab"			=> 2,
+		"VLSI Design Lab"			=> 2,
+		"Communication Skills Lab"		=> 2	},
+	7 => {
+		"Wireless Communication"		=> 3,
+		"Optical Communication and Networks"	=> 3,
+		"RF and Microwave Engineering"		=> 3,
+		"Elective II"				=> 3,
+		"Elective III"				=> 3,
+		"Elective IV"				=> 3,
+		"Electronics System Design Lab"		=> 2,
+		"Optical & Microwave Lab"		=> 2	},
 	},
 "Mechanical Engineering" => {
 	2 => {
@@ -184,7 +210,7 @@ $semester = {
 		"Basic Electrical and Electronics Engineering"	=> 4,
 		"Computer Practice  LAB II"	            	=> 2, 
 		"Physics and Chemisty LAB "               	=> 2,
-		"Computer Aided Drafting and Modeling LAB"	=> 2, },
+		"Computer Aided Drafting and Modeling LAB"	=> 2	},
 	3 => {
 		"Transforms and Partial Differential Equations"	=> 4,
 		"Manufacturing Technology  I"			=> 3,
@@ -208,7 +234,47 @@ $semester = {
 		"Data Structures and Algorithms"		=> 4,
 		"Electron Devices and Circuits Lab"		=> 2,
 		"Data Structures and Algorithms Lab"		=> 2,
-		"Measurements & Instrumentation Lab"		=> 2	}
+		"Measurements & Instrumentation Lab"		=> 2	},
+	4 => {
+		"Numerical Methods"=>4,
+		"Electrical Machines  I"=>4,
+		"Power Plant Engineering"=>4,
+		"Control Systems"=>4,
+		"Linear Integrated Circuits and Applications"=>3,
+		"Digital Logic Circuits"=>4,
+		"Control Systems Lab"=>2,
+		"Linear and Digital Integrated Circuits Lab"=>2,
+		"Electrical Machines Lab  I"=>2},
+	5 => {
+		"Communication Engineering"=>3,
+		"Digital Signal Processing"=>4,
+		"Object Oriented Programming"=>3,
+		"Power Electronics"=>3,
+		"Electrical Machines II"=>4,
+		"Transmission & Distribution"=>4,
+		"Object Oriented Programming Lab"=>2,
+		"Communication Skills Lab"=>2,
+		"Power Electronics Lab"=>2,
+		"Electrical Machines Lab II"=>2},
+	6 => {
+		"Power System Analysis"=>4,
+		"Solid State Drives"=>3,
+		"High Voltage Engineering"=>3,
+		"Microprocessors and Micro controller"=>3,
+		"Design of Electrical Machines"=>4,
+		"Computer Networks"=>3,
+		"Elective I"=>3,
+		"Microprocessor and Micro controller Lab"=>2,
+		"Presentation Skills and Technical Seminar"=>1},
+	7 => {
+		"Power System Operation and Control"=>3,
+		"Protection & Switchgear"=>3,
+		"Special Electrical Machines"=>3,
+		"Principles of Management"=>3,
+		"Operating Systems"=>3,
+		"Elective II"=>3,
+		"Power System Simulation Lab"=>2,
+		"Comprehension"=>1},
 },
 "Electronics and Instrumentation Engineering" => {
 	2 => common_to_eee_eie,
@@ -233,10 +299,14 @@ b1tch_please = {
 		  "Fundamentals of Computing and Programming "   => 3,
 		  "Computer Practice  LAB I"             	 => 2,
 		  "Engineering Practice  LAB" 	         	 => 2  }
-
+w_t_f =  {
+		"Elective IV"	=> 3,
+		"Elective V"	=> 3,
+		"Project Work"	=> 6	}
 
 $semester.keys.each do |hell_yeah|
 	$semester[hell_yeah][1] = b1tch_please # why on the earth they 've these subjects ????
+	$semester[hell_yeah][8] = w_t_f
 	$department_list.append_text hell_yeah
 	end
 name = Gtk::Label.new
@@ -254,7 +324,7 @@ list_group =  Gtk::VBox.new(false,0)
 [department,name].each do |heat_blast|
 label_group.pack_start(heat_blast,true,true,0)
 end
-[$department_list,$list].each do |diamond_head| # yeah I like Diamond_head more than Heat_Blast
+[$department_list,$list].each do |diamond_head| # yeah I like Diamond_head more than Heat_Blast - watch Ben 10 ?
 list_group.pack_start(diamond_head, true, true, 0)
 end
 # Get Button
@@ -377,7 +447,8 @@ By : ShanthaKumar
 Please report bugs to mail@shanth.tk
 
 Tweet your feedback @5hanth
-"""
+""" # wanna change this ? I 'd be pleased if you give my credicts in your modified version of this app.
+
 about_dialog = Gtk::MessageDialog.new(window,
 				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
 				      Gtk::MessageDialog::INFO,
@@ -393,13 +464,12 @@ end
 license.signal_connect('activate') do 
 tell="""
 	This program is a free software <www.fsf.org> ,
-you can redistribute it and/or modify it as per your wish
+you can redistribute it and/or modify it as per your wish,
 provided that you respect the freedom of others.
 
 	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 - ShanthaKumar
-  mail@shanth.tk
 """
 license_dialog = Gtk::MessageDialog.new(window,
 				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
