@@ -22,16 +22,15 @@ department.set_markup("<b>Department :</b> ")
 $department_list = Gtk::ComboBox.new(is_text_only = true)
 
 common_to_cse_it_ece = {  
-		  "Technical English II" 			=> 4, 
-		  "Mathematics II"                              => 4,
-		  "Engineering Physics II"                      => 3,
-		  "Engineering Chemistry II"                    => 3,
-		  "Electric Circuits and Electron Devices"      => 4,
-		  "Basic Civil and Mechanical Engineering"      => 4,
-		  "Computer Practice LAB II"                    => 2,
-		  "Physics and Chemisty LAB "                   => 2,
-		  "Circuits and Devices LAB"                    => 2  
-}
+			"Technical English II"			   => 4, 
+			"Mathematics II"                           => 4,
+			"Engineering Physics II"                   => 3,
+			"Engineering Chemistry II"                 => 3,
+			"Electric Circuits and Electron Devices"   => 4,
+			"Basic Civil and Mechanical Engineering"   => 4,
+			"Computer Practice LAB II"                 => 2,
+			"Physics and Chemisty LAB "                => 2,
+			"Circuits and Devices LAB"                 => 2	}
 common_to_eee_eie = {  
 		  "Technical English II" 			=> 4, 
 		  "Mathematics II"                              => 4,
@@ -41,37 +40,144 @@ common_to_eee_eie = {
 		  "Basic Civil and Mechanical Engineering"      => 4,
 		  "Computer Practice LAB II"                    => 2,
 		  "Physics and Chemisty LAB "                   => 2,
-		  "Electric Circuits LAB"	                => 2  
-}
+		  "Electric Circuits LAB"	                => 2	}
 $semester = {
 
 "Computer Science and Engineering" => {
-	2 => common_to_cse_it_ece
-	},
+	2 => common_to_cse_it_ece,
+	3 => {
+		"Transforms and Partial Differential Equations"	=> 4,
+		"Data Structures"				=> 3,
+		"Digital Principles and Systems Design"		=> 4,
+		"Object Oriented Programming"			=> 3,
+		"Analog and Digital Communication"		=> 4,
+		"Environmental Science and Engineering"		=> 3,
+		"Digital Lab"					=> 2,
+		"Data Structures Lab"				=> 2,
+		"Object Oriented Programming Lab"		=> 2	},
+	4 => {
+		"Probability and Queueing Theory"		=> 4,
+		"Design and Analysis of Algorithms"		=> 4,
+		"Microprocessors and Microcontrollers"		=> 3,
+		"Computer Organization and Architecture"	=> 3,
+		"Operating Systems"				=> 3,
+		"Database Management Systems"			=> 3,
+		"Operating Systems Lab"				=> 2,
+		"Data Base Management Systems Lab"		=> 2,
+		"Microprocessors Lab"				=> 2	},
+	5 => {
+		"Software Engineering"				=> 3,
+		"Discrete Mathematics"				=> 4,
+		"Computer Networks"				=> 3,
+		"Theory of Computation"			=> 4,
+		"System Software"				=> 4,
+		"Programming Paradigms"			=> 3,
+		"Network Lab"					=> 2,
+		"System Software Lab"				=> 2,
+		"Java Lab"					=> 2	},
+
+	6 => {
+		"Artificial Intelligence"			=> 3,
+		"Principles of Compiler Design"			=> 4,
+		"Object Oriented Analysis and Design"		=> 3,
+		"Advanced Computer Architecture"		=> 3,
+		"Elective – I"					=> 3,
+		"Elective – II"					=> 3,
+		"Object Oriented Analysis and Design Lab"	=> 2,
+		"Communication Skills Lab"			=> 2,
+		"Internet Programming Lab"			=> 2	},
+	7 => {
+		"Engineering Economics & Financial Accounting"	=> 3,
+		"Computer Graphics"				=> 3,
+		"Mobile and Pervasive Computing"		=> 3,
+		"Digital Signal Processing"			=> 3,
+		"Elective III"					=> 3,
+		"Elective IV"					=> 3,
+		"Computer Graphics Lab"			=> 2,
+		"Open Source Lab"				=> 2	},
+	8 => {
+		"Elective V"	=> 3,
+		"Elective VI"	=> 3,
+		"Project Work"	=> 6	}
+
+
+		},
 "Information Technology" => {
-	2 => common_to_cse_it_ece
+	2 => common_to_cse_it_ece,
+	3 => {
+		"Transforms and Partial Differential Equations"	=> 4,
+		"Digital Principles and Systems Design"		=> 4,
+		"Object Oriented Programming"			=> 3,
+		"Data Structures and Algorithms"		=> 3,
+		"Principles of Communication"			=> 4,
+		"Environmental Science and Engineering"		=> 3,
+		"Digital Lab"					=> 2,
+		"Data Structures and Algorithms Lab"		=> 2,
+		"Object Oriented Programming Lab"		=> 2 	}
+
 	},
 "Electronics and Communication Engineering" => {
-	2 => common_to_cse_it_ece
+	2 => common_to_cse_it_ece,
+	3 => {
+		"Transforms and Partial Differential Equations"			=> 4,
+		"Electrical Engineering"					=> 3,
+		"Data Structures and Object Oriented Programming in C++"  	=> 3,
+		"Digital Electronics"						=> 4,
+		"Signals and systems"						=> 4,
+		"Electronic Circuits"						=> 4,
+		"Digital Electronics Lab"					=> 2,
+		"Electronic Circuits Lab I"					=> 2,
+		"Data structures and Object Oriented Programming Lab"		=> 2	}
 	},
 "Mechanical Engineering" => {
 	2 => {
-		  "Technical English II" 				=> 4, 
-		  "Mathematics II"              	                => 4,
-		  "Engineering Physics II"      	                => 3,
-		  "Engineering Chemistry II"    	                => 3,
-		  "Engineering Mechanics"				=> 4,
-		  "Basic Electrical and Electronics Engineering"	=> 4,
-		  "Computer Practice  LAB II"	            		=> 2, 
-		  "Physics and Chemisty LAB "               		=> 2,
-		  "Computer Aided Drafting and Modeling LAB"		=> 2, }
+		"Technical English II" 				=> 4, 
+		"Mathematics II"              	                => 4,
+		"Engineering Physics II"      	                => 3,
+		"Engineering Chemistry II"    	                => 3,
+		"Engineering Mechanics"				=> 4,
+		"Basic Electrical and Electronics Engineering"	=> 4,
+		"Computer Practice  LAB II"	            	=> 2, 
+		"Physics and Chemisty LAB "               	=> 2,
+		"Computer Aided Drafting and Modeling LAB"	=> 2, },
+	3 => {
+		"Transforms and Partial Differential Equations"	=> 4,
+		"Manufacturing Technology – I"			=> 3,
+		"Engineering Thermodynamics"			=> 4,
+		"Kinematics of Machinery"			=> 4,
+		"Fluid Mechanics and Machinery"			=> 4,
+		"Electrical Drives and Control"			=> 3,
+		"Manufacturing Technology Lab – I"		=> 2,
+		"Fluid Mechanics and Machinery Lab"		=> 2,
+		"Electrical Engineering Lab"			=> 2	}
+		 }
 },
 "Electrical and Electronics Engineering" => {
-	2 => common_to_eee_eie
-	},
+	2 => common_to_eee_eie,
+	3 => {
+		"Transforms and Partial Differential Equations"	=> 4,
+		"Measurements & Instrumentation"		=> 3,
+		"Electromagnetic Theory"			=> 4,
+		"Environmental Science and Engineering"		=> 3,
+		"Electronic Devices & Circuits"			=> 3,
+		"Data Structures and Algorithms"		=> 4,
+		"Electron Devices and Circuits Lab"		=> 2,
+		"Data Structures and Algorithms Lab"		=> 2,
+		"Measurements & Instrumentation Lab"		=> 2	}
+},
 "Electronics and Instrumentation Engineering" => {
-	2 => common_to_eee_eie
-	}
+	2 => common_to_eee_eie,
+	3 => {
+		"Transforms and Partial Differential Equations"	=> 4,
+		"Environmental Science and Engineering"		=> 3,
+		"Electrical Machines"				=> 4,
+		"Electronic Devices and Circuits"		=> 3,
+		"Data Structures and Algorithms"		=> 4,
+		"Electrical Measurements"			=> 4,
+		"Electron Devices and Circuits Lab"		=> 2,
+		"Data Structures and Algorithms Lab"		=> 2,
+		"Electrical Machines Lab"			=> 2	}
+		}
 }
 b1tch_please = { 
 		  "Technical English I"     			 => 4,
@@ -100,11 +206,11 @@ $department_list.active = $list.active = 0
 label_group =  Gtk::VBox.new(false,0)
 list_group =  Gtk::VBox.new(false,0)
 
-[department,name].each do |shit|
-label_group.pack_start(shit,true,true,0)
+[department,name].each do |heat_blast|
+label_group.pack_start(heat_blast,true,true,0)
 end
-[$department_list,$list].each do |crap|
-list_group.pack_start(crap, true, true, 0)
+[$department_list,$list].each do |diamond_head| # yeah I like Diamond_head more than Heat_Blast
+list_group.pack_start(diamond_head, true, true, 0)
 end
 # Get Button
 go = Gtk::Button.new("Go")
