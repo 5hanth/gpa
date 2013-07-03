@@ -14,49 +14,44 @@ department = Gtk::Label.new
 department.set_markup("<b>Department :</b> ")
 $department_list = Gtk::ComboBox.new(is_text_only = true)
 
+common_to_cse_it_ece = {  
+		  "Technical English II" 			=> 4, 
+		  "Mathematics II"                              => 4,
+		  "Engineering Physics II"                      => 3,
+		  "Engineering Chemistry II"                    => 3,
+		  "Electric Circuits and Electron Devices"      => 4,
+		  "Basic Civil and Mechanical Engineering"      => 4,
+		  "Computer Practice LAB II"                    => 2,
+		  "Physics and Chemisty LAB "                   => 2,
+		  "Circuits and Devices LAB"                    => 2  }
+
 $semester = {
 
 "Computer Science and Engineering" => {
-	2 =>	{  
-		  "Technical English II" 			=> 4, 
-		  "Mathematics II"                              => 4,
-		  "Engineering Physics II"                      => 3,
-		  "Engineering Chemistry II"                    => 3,
-		  "Electric Circuits and Electron Devices"      => 4,
-		  "Basic Civil and Mechanical Engineering"      => 4,
-		  "CP LAB II"                                   => 2,
-		  "Physics and Chemisty LAB "                   => 2,
-		  "EDC LAB"                                     => 2  }
-	  },
-"Information Technology" => {
-	2 =>	{  
-		  "Technical English II" 			=> 4, 
-		  "Mathematics II"                              => 4,
-		  "Engineering Physics II"                      => 3,
-		  "Engineering Chemistry II"                    => 3,
-		  "Electric Circuits and Electron Devices"      => 4,
-		  "Basic Civil and Mechanical Engineering"      => 4,
-		  "CP LAB II"                                   => 2,
-		  "Physics and Chemisty LAB "                   => 2,
-		  "EDC LAB"                                     => 2  }
+	2 => common_to_cse_it_ece
 	},
-"Electronics and Communication Engineering" => {},
+"Information Technology" => {
+	2 => common_to_cse_it_ece
+	},
+"Electronics and Communication Engineering" => {
+	2 => common_to_cse_it_ece 
+	},
 "Mechanical Engineering" => {},
 "Electrical and Electronics Engineering" => {}
 }
-common = { 
-	  "Technical English I"      => 4,
-	  "Mathematics I"            => 4,
-	  "Engineering Physics I"    => 3,
-	  "Engineering Chemistry I"  => 3,
-	  "Engineering Graphics"     => 5,
-	  "FOC"                      => 3,
-	  "CP LAB I"                 => 2,
-	  "EP LAB" 	             => 2  }
+b1tch_please = { 
+		  "Technical English I"     			 => 4,
+		  "Mathematics I"           			 => 4,
+		  "Engineering Physics I"   			 => 3,
+		  "Engineering Chemistry I" 			 => 3,
+		  "Engineering Graphics"    			 => 5,
+		  "Fundamentals of Computing and Programming "   => 3,
+		  "Computer Practice  LAB I"             	 => 2,
+		  "Engineering Practice  LAB" 	         	 => 2  }
 
 
 $semester.keys.each do |hell_yeah|
-	$semester[hell_yeah][1] = common
+	$semester[hell_yeah][1] = b1tch_please # why on the earth they 've these subjects ????
 	$department_list.append_text hell_yeah
 	end
 name = Gtk::Label.new
