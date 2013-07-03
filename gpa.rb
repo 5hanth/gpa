@@ -220,7 +220,53 @@ $semester = {
 		"Electrical Drives and Control"			=> 3,
 		"Manufacturing Technology Lab  I"		=> 2,
 		"Fluid Mechanics and Machinery Lab"		=> 2,
-		"Electrical Engineering Lab"			=> 2	}
+		"Electrical Engineering Lab"			=> 2	},
+	4 => {
+		"Statistics and Numerical Methods"=>4,
+		"Heat and Mass Transfer"=>4,
+		"Manufacturing Technology"=>3,
+		"Engineering Materials and Metallurgy"=>3,
+		"Strength of Materials"=>4,
+		"Electronics and Microprocessors"=>3,
+		"Manufacturing Technology Lab"=>2,
+		"Strength of Materials Lab"=>2,
+		"Computer Aided Machine Drawing Laboratory"=>2},
+	5 => {
+		"Environmental Science and Engineering"=>3,
+		"Database Management Systems"=>4,
+		"Design of Machine Elements"=>4,
+		"Management of Manufacturing System"=>4,
+		"Measurements and Controls"=>3,
+		"Applied Hydraulics and Pneumatics"=>3,
+		"Dynamics Lab"=>2,
+		"Metrology and Measurements Lab"=>2,
+		"Computer Aided Machine Drawing Practice"=>2,
+		"Database Management Systems Lab"=>2},
+	6 => {
+		"Principles of Management"=>3,
+		"Gas Dynamics and Jet Propulsion"=>4,
+		"Design of Transmission Systems"=>4,
+		"Automobile Engineering"=>3,
+		"Finite Element Analysis"=>4,
+		"Elective I"=>3,
+		"Thermal Engineering Lab II"=>2,
+		"Design & Fabrication Project"=>2,
+		"Communication Skills Lab"=>2},
+	7 => {
+		"Total Quality Management"=>3,
+		"Mechatronics"=>3,
+		"Computer Integrated Manufacturing"=>3,
+		"Power Plant Engineering"=>3,
+		"Elective II"=>3,
+		"Elective III"=>3,
+		"Computer Aided Simulation & Analysis Lab"=>2,
+		"Mechatronics Lab"=>2},
+	8 => {
+		"Engineering Economics and Cost Analysis"=>3,
+		"Elective IV"=>3,
+		"Elective V"=>3,
+		"Comprehension"=>1,
+		"Project Work"=>6},
 		 
 },
 "Electrical and Electronics Engineering" => {
@@ -306,7 +352,7 @@ w_t_f =  {
 
 $semester.keys.each do |hell_yeah|
 	$semester[hell_yeah][1] = b1tch_please # why on the earth they 've these subjects ????
-	$semester[hell_yeah][8] = w_t_f
+	$semester[hell_yeah][8] = w_t_f if hell_yeah!="Mechanical Engineering"
 	$department_list.append_text hell_yeah
 	end
 name = Gtk::Label.new
