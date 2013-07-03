@@ -8,7 +8,7 @@ base = Gtk::VBox.new(false,10)
 image = Gtk::Image.new(value = "logo.png")
 
 # semester_$list
-semester_list = Gtk::HBox.new(false,5)
+semester_list = Gtk::HBox.new(false,10)
 
 department = Gtk::Label.new
 department.set_markup("<b>Department :</b> ")
@@ -36,22 +36,25 @@ label_group =  Gtk::VBox.new(false,0)
 list_group =  Gtk::VBox.new(false,0)
 
 [department,name].each do |shit|
-label_group.pack_end(shit,true,true,0)
+label_group.pack_start(shit,true,true,0)
 end
 [$department_list,$list].each do |crap|
 list_group.pack_start(crap, true, true, 0)
 end
 # Get Button
 go = Gtk::Button.new("Go")
-
+go.set_size_request  70, 30
+align = Gtk::Alignment.new 1,1,0,0
+align.left_padding =  1
+align.add go
 # pack semester label and combobox
 [label_group,Gtk::VSeparator.new,list_group,Gtk::VSeparator.new].each do |blah| 
-semester_list.pack_start(blah,true,true,0)
+semester_list.pack_start(blah,false,false,0)
 end
 
 # pack logo, semester_$list, subjects and :P
-[image,semester_list,go].each do |blah|
-base.pack_start(blah,true,true,0)
+[image,Gtk::HSeparator.new,semester_list,Gtk::HSeparator.new,align].each do |blah|
+base.pack_start(blah,false,false,0)
 end
 
 
@@ -91,6 +94,7 @@ end
 def show_subjects
 subjects_window = Gtk::Window.new
 subjects_window.modal = true
+subjects_window.window_position = Gtk::Window::POS_CENTER
 subjects_window.destroy_with_parent = true
 subjects_window.title = "Choose Your Grade in each Subject:"
 subjects_window.resizable = false
