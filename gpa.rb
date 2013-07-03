@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'gtk2'
 window  = Gtk::Window.new
 window.title = "GPA Calculator for Anna University"
@@ -7,7 +8,6 @@ base = Gtk::VBox.new(false,10)
 
 image = Gtk::Image.new(value = "logo.png")
 
-# semester_$list
 semester_list = Gtk::HBox.new(false,10)
 
 department = Gtk::Label.new
@@ -23,8 +23,19 @@ common_to_cse_it_ece = {
 		  "Basic Civil and Mechanical Engineering"      => 4,
 		  "Computer Practice LAB II"                    => 2,
 		  "Physics and Chemisty LAB "                   => 2,
-		  "Circuits and Devices LAB"                    => 2  }
-
+		  "Circuits and Devices LAB"                    => 2  
+}
+common_to_eee_eie = {  
+		  "Technical English II" 			=> 4, 
+		  "Mathematics II"                              => 4,
+		  "Engineering Physics II"                      => 3,
+		  "Engineering Chemistry II"                    => 3,
+		  "Circuit Theory"				=> 4,
+		  "Basic Civil and Mechanical Engineering"      => 4,
+		  "Computer Practice LAB II"                    => 2,
+		  "Physics and Chemisty LAB "                   => 2,
+		  "Electric Circuits LAB"	                => 2  
+}
 $semester = {
 
 "Computer Science and Engineering" => {
@@ -34,10 +45,26 @@ $semester = {
 	2 => common_to_cse_it_ece
 	},
 "Electronics and Communication Engineering" => {
-	2 => common_to_cse_it_ece 
+	2 => common_to_cse_it_ece
 	},
-"Mechanical Engineering" => {},
-"Electrical and Electronics Engineering" => {}
+"Mechanical Engineering" => {
+	2 => {
+		  "Technical English II" 				=> 4, 
+		  "Mathematics II"              	                => 4,
+		  "Engineering Physics II"      	                => 3,
+		  "Engineering Chemistry II"    	                => 3,
+		  "Engineering Mechanics"				=> 4,
+		  "Basic Electrical and Electronics Engineering"	=> 4,
+		  "Computer Practice  LAB II"	            		=> 2, 
+		  "Physics and Chemisty LAB "               		=> 2,
+		  "Computer Aided Drafting and Modeling LAB"		=> 2, }
+},
+"Electrical and Electronics Engineering" => {
+	2 => common_to_eee_eie
+	},
+"Electronics and Instrumentation Engineering" => {
+	2 => common_to_eee_eie
+	}
 }
 b1tch_please = { 
 		  "Technical English I"     			 => 4,
@@ -56,7 +83,7 @@ $semester.keys.each do |hell_yeah|
 	end
 name = Gtk::Label.new
 name.set_markup("<b>Semester :</b> ")
-## combobox for semester_$list
+
 $list = Gtk::ComboBox.new(is_text_only = true)
 (1..8).each do |blah|
 $list.append_text blah.to_s
@@ -169,8 +196,7 @@ dialog = Gtk::MessageDialog.new( subjects_window,
 dialog.signal_connect('response') do
 dialog.destroy
 end
-
-
+dialog.title = "Your GPA"
 dialog.run
 end
 end
