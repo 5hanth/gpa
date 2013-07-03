@@ -5,8 +5,14 @@ window.title = "GPA Calculator for Anna University"
 window.resizable = false
 window.window_position = Gtk::Window::POS_CENTER
 menubar = Gtk::MenuBar.new
+application = Gtk::MenuItem.new("Application")
+application.submenu = Gtk::Menu.new
 about = Gtk::MenuItem.new("About")
-menubar.append about
+license = Gtk::MenuItem.new("License")
+[about, license].each do |hehehehe|
+application.submenu.append hehehehe
+end
+menubar.append application
 base = Gtk::VBox.new(false,10) 
 
 semester_list = Gtk::HBox.new(false,10)
@@ -107,7 +113,7 @@ align = Gtk::Alignment.new 1,1,0,0
 align.left_padding =  1
 align.add go
 # pack semester label and combobox
-[label_group,Gtk::VSeparator.new,list_group,Gtk::VSeparator.new].each do |blah| 
+[Gtk::VSeparator.new,label_group,Gtk::VSeparator.new,list_group,Gtk::VSeparator.new].each do |blah| 
 semester_list.pack_start(blah,false,false,0)
 end
 
@@ -192,7 +198,7 @@ dialog = Gtk::MessageDialog.new( subjects_window,
 				Gtk::MessageDialog::DESTROY_WITH_PARENT,
 				Gtk::MessageDialog::INFO,
 				Gtk::MessageDialog::BUTTONS_OK,
-				message="Your GPA is #{total/sum} !")
+				message="Your GPA is #{(total/sum).round(3)} !")
 
 dialog.signal_connect('response') do
 dialog.destroy
@@ -224,9 +230,34 @@ about_dialog = Gtk::MessageDialog.new(window,
 				      Gtk::MessageDialog::BUTTONS_OK,
 				      message = tell
 				       )
+about_dialog.title = "About"
 about_dialog.signal_connect('response') do
 about_dialog.destroy
 end
 about_dialog.run
 end
+license.signal_connect('activate') do 
+tell="""
+	This program is a free software <www.fsf.org> ,
+you can redistribute it and/or modify it as per your wish
+provided that you respect the freedom of others.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+- ShanthaKumar
+  mail@shanth.tk
+"""
+license_dialog = Gtk::MessageDialog.new(window,
+				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
+				      Gtk::MessageDialog::INFO,
+				      Gtk::MessageDialog::BUTTONS_OK,
+				      message = tell
+				       )
+license_dialog.title = "License Notice"
+license_dialog.signal_connect('response') do
+license_dialog.destroy
+end
+license_dialog.run
+end
+
 Gtk.main
