@@ -81,8 +81,8 @@ $semester = {
 		"Principles of Compiler Design"			=> 4,
 		"Object Oriented Analysis and Design"		=> 3,
 		"Advanced Computer Architecture"		=> 3,
-		"Elective – I"					=> 3,
-		"Elective – II"					=> 3,
+		"Elective  I"					=> 3,
+		"Elective  II"					=> 3,
 		"Object Oriented Analysis and Design Lab"	=> 2,
 		"Communication Skills Lab"			=> 2,
 		"Internet Programming Lab"			=> 2	},
@@ -142,15 +142,15 @@ $semester = {
 		"Computer Aided Drafting and Modeling LAB"	=> 2, },
 	3 => {
 		"Transforms and Partial Differential Equations"	=> 4,
-		"Manufacturing Technology – I"			=> 3,
+		"Manufacturing Technology  I"			=> 3,
 		"Engineering Thermodynamics"			=> 4,
 		"Kinematics of Machinery"			=> 4,
 		"Fluid Mechanics and Machinery"			=> 4,
 		"Electrical Drives and Control"			=> 3,
-		"Manufacturing Technology Lab – I"		=> 2,
+		"Manufacturing Technology Lab  I"		=> 2,
 		"Fluid Mechanics and Machinery Lab"		=> 2,
 		"Electrical Engineering Lab"			=> 2	}
-		 }
+		 
 },
 "Electrical and Electronics Engineering" => {
 	2 => common_to_eee_eie,
@@ -214,9 +214,8 @@ list_group.pack_start(diamond_head, true, true, 0)
 end
 # Get Button
 go = Gtk::Button.new("Go")
-# go.set_size_request  70, 30
-align = Gtk::Alignment.new 1,1,0,0
-align.left_padding =  1
+align = Gtk::Alignment.new(1,1,0,0)
+align.set_padding(0,10,0,10)
 align.add go
 # pack semester label and combobox
 [Gtk::VSeparator.new,label_group,Gtk::VSeparator.new,list_group,Gtk::VSeparator.new].each do |blah| 
@@ -241,6 +240,7 @@ end
 
 def show_subjects
 subjects_window = Gtk::Window.new
+subjects_window.border_width = 20
 subjects_window.modal = true
 subjects_window.window_position = Gtk::Window::POS_CENTER
 subjects_window.destroy_with_parent = true
@@ -253,8 +253,11 @@ content.set_column_spacing boooooom,25
 end
 content.set_row_spacing 0,25
 subjects = Gtk::VBox.new(false,0)
+subjects.pack_start(Gtk::Label.new.set_markup("<b>Subject</b>"),true,true,10)
 credicts = Gtk::VBox.new(false,0)
+credicts.pack_start(Gtk::Label.new.set_markup("<b>Credicts</b>"),true,true,10)
 grades = Gtk::VBox.new(false,0)
+grades.pack_start(Gtk::Label.new.set_markup("<b>Grade</b>"),true,true,15)
 grade = {} # hash of each combobox
 dep = $department_list.active_text
 sem =  $list.active_text.to_i
@@ -304,7 +307,7 @@ dialog = Gtk::MessageDialog.new( subjects_window,
 				Gtk::MessageDialog::DESTROY_WITH_PARENT,
 				Gtk::MessageDialog::INFO,
 				Gtk::MessageDialog::BUTTONS_OK,
-				message="Your GPA is #{(total/sum).round(3)} !")
+				message="Your GPA is #{(total/sum).round(3)} !") # yeah, I remember my GPA was 7.92 last semester o_O
 
 dialog.signal_connect('response') do
 dialog.destroy
