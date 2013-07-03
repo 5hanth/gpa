@@ -4,9 +4,10 @@ window  = Gtk::Window.new
 window.title = "GPA Calculator for Anna University"
 window.resizable = false
 window.window_position = Gtk::Window::POS_CENTER
+menubar = Gtk::MenuBar.new
+about = Gtk::MenuItem.new("About")
+menubar.append about
 base = Gtk::VBox.new(false,10) 
-
-image = Gtk::Image.new(value = "logo.png")
 
 semester_list = Gtk::HBox.new(false,10)
 
@@ -111,7 +112,7 @@ semester_list.pack_start(blah,false,false,0)
 end
 
 # pack logo, semester_$list, subjects and :P
-[image,Gtk::HSeparator.new,semester_list,Gtk::HSeparator.new,align].each do |blah|
+[menubar,Gtk::Image.new(value = "logo.png"),Gtk::HSeparator.new,semester_list,Gtk::HSeparator.new,align].each do |blah|
 base.pack_start(blah,false,false,0)
 end
 
@@ -203,6 +204,29 @@ end
 
 window.add(base)
 
-# $list.active = 0 # why ? cuz it just works :P
 window.show_all
+
+about.signal_connect('activate') do 
+tell="""
+GPA Calculator for Anna University U.G Courses
+
+Version 0.1
+
+By : ShanthaKumar
+
+Please report bugs to mail@shanth.tk
+
+Tweet your feedback @5hanth
+"""
+about_dialog = Gtk::MessageDialog.new(window,
+				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
+				      Gtk::MessageDialog::INFO,
+				      Gtk::MessageDialog::BUTTONS_OK,
+				      message = tell
+				       )
+about_dialog.signal_connect('response') do
+about_dialog.destroy
+end
+about_dialog.run
+end
 Gtk.main
