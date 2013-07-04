@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
 require 'gtk2'
+
+# Main Window
 window  = Gtk::Window.new
 window.title = "GPA Calculator for Anna University"
 window.resizable = false
 window.window_position = Gtk::Window::POS_CENTER
+
+# Menubar
 menubar = Gtk::MenuBar.new
 application = Gtk::MenuItem.new("Application")
 application.submenu = Gtk::Menu.new
@@ -13,14 +17,8 @@ license = Gtk::MenuItem.new("License")
 application.submenu.append hehehehe
 end
 menubar.append application
-base = Gtk::VBox.new(false,10) 
 
-semester_list = Gtk::HBox.new(false,10)
-
-department = Gtk::Label.new
-department.set_markup("<b>Department :</b> ")
-$department_list = Gtk::ComboBox.new(is_text_only = true)
-
+# database starts
 common_to_cse_it_ece = {  
 			"Technical English II"			   => 4, 
 			"Mathematics II"                           => 4,
@@ -41,6 +39,10 @@ common_to_eee_eie = {
 		  "Computer Practice LAB II"                    => 2,
 		  "Physics and Chemisty LAB "                   => 2,
 		  "Electric Circuits LAB"	                => 2	}
+
+# $semester is a hash whose keys are depts & their values are hashes whose keys are sems 
+# & their values are hashes whose keys are subjects and their values are credits.
+# ;-) this is what I like with Ruby and Hashes xD
 $semester = {
 
 "Computer Science and Engineering" => {
@@ -333,9 +335,37 @@ $semester = {
 		"Electrical Measurements"			=> 4,
 		"Electron Devices and Circuits Lab"		=> 2,
 		"Data Structures and Algorithms Lab"		=> 2,
-		"Electrical Machines Lab"			=> 2	}
-		}
+		"Electrical Machines Lab"			=> 2	},
+		
+	4 => {
+		"Control Systems"=>4,
+		"Industrial Instrumentation I"=>3,
+		"Transducer Engineering"=>3,
+		"Digital logic Circuits"=>4,
+		"Linear Integrated Circuits and Applications"=>3,
+		"Applied Thermodynamics"=>4,
+		"Transducers and Measurements Lab"=>2,
+		"Thermodynamics Lab"=>2,
+		"Linear and Digital Integrated circuits Lab"=>2},
+	6 => {
+		"Modern Electronic Instrumentation"=>3,
+		"Process Control"=>4,
+		"Digital System Design"=>3,
+		"Digital Signal Processing"=>4,
+		"Embedded System"=>3,
+		"Biomedical Instrumentation"=>3,
+		"Communication and DSP Lab"=>2,
+		"Process Control System Lab"=>2,
+		"Virtual Instrumentation Lab"=>2},
+	8 => {
+		"Principles of Management"=>3,
+		"Elective III"=>3,
+		"Elective IV"=>3,
+		"Project Work"=>6}
 }
+}
+
+# And here comes the irrelevant subjects to irrelevant fields ...
 b1tch_please = { 
 		  "Technical English I"     			 => 4,
 		  "Mathematics I"           			 => 4,
@@ -345,45 +375,64 @@ b1tch_please = {
 		  "Fundamentals of Computing and Programming "   => 3,
 		  "Computer Practice  LAB I"             	 => 2,
 		  "Engineering Practice  LAB" 	         	 => 2  }
+# and this one where you get credits for others work ...
 w_t_f =  {
 		"Elective IV"	=> 3,
 		"Elective V"	=> 3,
 		"Project Work"	=> 6	}
+# list of depts
+$department_list = Gtk::ComboBox.new(is_text_only = true)
 
+# I missed few data intentionally.. lemme fix that along with filling combobox!
 $semester.keys.each do |hell_yeah|
 	$semester[hell_yeah][1] = b1tch_please # why on the earth they 've these subjects ????
-	$semester[hell_yeah][8] = w_t_f if hell_yeah!="Mechanical Engineering"
+	$semester[hell_yeah][8] = w_t_f unless ["Mechanical Engineering","Electronics and Instrumentation Engineering"].include? hell_yeah
 	$department_list.append_text hell_yeah
 	end
-name = Gtk::Label.new
-name.set_markup("<b>Semester :</b> ")
 
+# Window holds a VBox 'base'
+base = Gtk::VBox.new(false,10) 
+
+# 'base' VBox holds 2 HBox - options & 'go' button 
+semester_list = Gtk::HBox.new(false,10) # this will hold options
+
+# lemme fill the semester dropdown list box - dono why they call it combo o_0
 $list = Gtk::ComboBox.new(is_text_only = true)
 (1..8).each do |blah|
 $list.append_text blah.to_s
 end
 
+# this one for some who are stupids to click go directly without choosing options
 $department_list.active = $list.active = 0
+
+# two VBox - to hold labels and list boxes
 label_group =  Gtk::VBox.new(false,0)
 list_group =  Gtk::VBox.new(false,0)
 
-[department,name].each do |heat_blast|
+# create labels and pack it into label_group
+[	Gtk::Label.new.set_markup("<b>Department :</b>"),
+	Gtk::Label.new.set_markup("<b>Semester :</b>")
+].each do |heat_blast|
 label_group.pack_start(heat_blast,true,true,0)
 end
+
+# lemme pack the list boxes to list_group
 [$department_list,$list].each do |diamond_head| # yeah I like Diamond_head more than Heat_Blast - watch Ben 10 ?
 list_group.pack_start(diamond_head, true, true, 0)
 end
+
 # Get Button
 go = Gtk::Button.new("Go")
-align = Gtk::Alignment.new(1,1,0,0)
+align = Gtk::Alignment.new(1,1,0,0) # else go 'll expand in VBOx - won't be nice
 align.set_padding(0,10,0,10)
 align.add go
-# pack semester label and combobox
+
+# pack label_group and list_group with separators to make it look nice
 [Gtk::VSeparator.new,label_group,Gtk::VSeparator.new,list_group,Gtk::VSeparator.new].each do |blah| 
 semester_list.pack_start(blah,false,false,0)
 end
 
-# pack logo, semester_$list, subjects and :P
+# pack menu, logo, semester_$list, go button :P
 [menubar,Gtk::Image.new(value = "logo.png"),Gtk::HSeparator.new,semester_list,Gtk::HSeparator.new,align].each do |blah|
 base.pack_start(blah,false,false,0)
 end
