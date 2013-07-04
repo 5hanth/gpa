@@ -415,8 +415,8 @@ end
 content.set_row_spacing 0,25
 subjects = Gtk::VBox.new(false,0)
 subjects.pack_start(Gtk::Label.new.set_markup("<b>Subject</b>"),true,true,10)
-credicts = Gtk::VBox.new(false,0)
-credicts.pack_start(Gtk::Label.new.set_markup("<b>Credicts</b>"),true,true,10)
+credits = Gtk::VBox.new(false,0)
+credits.pack_start(Gtk::Label.new.set_markup("<b>Credits</b>"),true,true,10)
 grades = Gtk::VBox.new(false,0)
 grades.pack_start(Gtk::Label.new.set_markup("<b>Grade</b>"),true,true,15)
 grade = {} # hash of each combobox
@@ -425,7 +425,7 @@ sem =  $list.active_text.to_i
  
 $semester[dep][sem].keys.each do |blah|
 	subjects.pack_start(Gtk::Label.new(blah), true, true, 0)
-	credicts.pack_start(Gtk::Label.new(($semester[dep][sem][blah]).to_s), true, true, 0)
+	credits.pack_start(Gtk::Label.new(($semester[dep][sem][blah]).to_s), true, true, 0)
 	grade[blah] = Gtk::ComboBox.new
 	["S","A","B","C","D","E"].each do |yeah|
  	grade[blah].append_text yeah
@@ -435,7 +435,7 @@ $semester[dep][sem].keys.each do |blah|
 	
 end
 content.attach(subjects,0,1,0,1)
-content.attach(credicts,1,2,0,1)
+content.attach(credits,1,2,0,1)
 content.attach(grades,2,3,0,1)
 calculate_button = Gtk::Button.new("Calculate GPA")
 calculate = Gtk::Alignment.new 1, 1, 0, 0
@@ -493,7 +493,7 @@ By : ShanthaKumar
 Please report bugs to mail@shanth.tk
 
 Tweet your feedback @5hanth
-""" # wanna change this ? I 'd be pleased if you give my credicts in your modified version of this app.
+""" # wanna change this ? I 'd be pleased if you give my credits in your modified version of this app.
 
 about_dialog = Gtk::MessageDialog.new(window,
 				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
