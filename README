@@ -3,11 +3,46 @@ System Requirements :
 
 *) Ruby interrupter
 
-To install it,
-ask Google: " Ruby install <Your Platform> "
-
 *) Gtk Bindings for Ruby
 
-To install it, 
-ask Google: " Ruby Gtk2 install <Your Platform> "
+	------------------------------------
+	| Dependencies Install Instruction |
+	------------------------------------
 
+For Ubuntu/Debian GNU/Linux users,
+
+	1) Open Terminal and install ruby and ruby-gtk2 using your package manager,
+	
+	$ sudo apt-get install ruby ruby-gtk2 
+
+	2) Now extract the downloaded .zip from github repo and double click gpa.rb  
+
+	Easy enough ?
+
+For Window$ users,
+
+	I don't know whether you could understand what I mean....
+
+	1) Download and install Ruby ( http://rubyinstaller.org/downloads/ )
+
+	2) Install Gtk+ Runtime ( http://prdownloads.sourceforge.net/ruby-gnome2/ruby-gnome2-0.16.0-1-i386-mswin32.exe?download )
+
+	3) Install gtk2 gem
+
+	c:\ruby\bin\> gem install gtk2
+
+	3) Run gpa.rb file 
+
+	E:\gpacalc\> ruby gpa.rb
+
+	If this don't work, ask Google :P
+
+
+For Mac users,
+	
+	ask Google :P
+
+
+	----------------------------------------
+	| Please report bugs to mail@shanth.tk |
+	----------------------------------------
