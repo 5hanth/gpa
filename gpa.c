@@ -1,24 +1,16 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include "points.h"
-static void destroy( GtkWidget *widget,
-		gpointer   data )
-{
-	gtk_main_quit ();
-}
-
 
 void show_subjects(GtkWidget* , GtkWidget** );
 void calculate_run(GtkWidget *, gpointer);
-void about_dialog(GtkWidget *menuitem, gpointer data);
-void license_dialog(GtkWidget *menuitem, gpointer data);
-
+void about_dialog(GtkWidget* , gpointer );
+void license_dialog(GtkWidget*, gpointer );
 
 GtkWidget *window;
-int main(int argc, const char **argv)
+int main(int argc, char **argv)
 {
 	GtkWidget  *menubar,*submenu, *application, *about, *license, *department_list, *semester_list, *base, *list, *label_group, *list_group, *go, *align;
-	int i;
 	Department dep;
 	Semester sem;
 	GtkWidget *active[2];
@@ -53,6 +45,7 @@ int main(int argc, const char **argv)
 
 	for(dep = CSE; dep<=EI; dep++) 
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(department_list), departments[dep]); //make sure its const char* :)
+
 	gtk_combo_box_set_active(GTK_COMBO_BOX(department_list),0);
 
 	base = gtk_box_new(GTK_ORIENTATION_VERTICAL,10);
@@ -63,6 +56,7 @@ int main(int argc, const char **argv)
 
 	for (sem = one; sem <=eight; sem++) 
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(list), g_strdup_printf("%d",sem+1) );
+
 	gtk_combo_box_set_active(GTK_COMBO_BOX(list),0);
 
 	label_group = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
@@ -118,13 +112,12 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	gtk_container_set_border_width(GTK_CONTAINER(subjects_window),20);
 	gtk_window_set_modal(GTK_WINDOW(subjects_window), TRUE);
 	gtk_window_set_position(GTK_WINDOW(subjects_window),GTK_WIN_POS_CENTER);
-	// gtk_window_destroy_with_parent(GTK_WINDOW(subjects_window),TRUE);
 	gtk_window_set_title(GTK_WINDOW(subjects_window),"Choose Your Grade in each Subject: ");
 	gtk_window_set_resizable(GTK_WINDOW(subjects_window),FALSE);
 
 	content = gtk_grid_new();
-	   gtk_grid_set_column_spacing(GTK_GRID(content),12);
-	   gtk_grid_set_column_spacing(GTK_GRID(content),12);
+	gtk_grid_set_column_spacing(GTK_GRID(content),12);
+	gtk_grid_set_column_spacing(GTK_GRID(content),12);
 
 	subjects = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
 	gtk_box_set_spacing(GTK_BOX(subjects),4);
@@ -140,18 +133,17 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	for(p = 0; p<no_of_papers[Dep][Sem]; p++) {
 		gtk_box_pack_start(GTK_BOX(subjects), gtk_label_new(list[Dep][Sem][p].paper), TRUE, TRUE, 0);
 		gtk_box_pack_start(GTK_BOX(credits), 
-				gtk_label_new(
-					g_strdup_printf("%d",list[Dep][Sem][p].points)), TRUE, TRUE, 0);
+				gtk_label_new(g_strdup_printf("%d",list[Dep][Sem][p].points)), TRUE, TRUE, 0);
 
 		grade[p] = gtk_combo_box_text_new();
 
 		for(i=0;i<7;i++)
 			gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(grade[p]), grade_list[i]); 
+
 		gtk_combo_box_set_active(GTK_COMBO_BOX(grade[p]),0);
 		gtk_box_pack_start( GTK_BOX(grades), grade[p], TRUE, TRUE, 0);
-
-
 	}
+
 	gtk_grid_attach_next_to(GTK_GRID(content),subjects,NULL,GTK_POS_RIGHT,1,1);
 	gtk_grid_attach_next_to(GTK_GRID(content),credits,NULL,GTK_POS_RIGHT,1,1);
 	gtk_grid_attach_next_to(GTK_GRID(content),grades,NULL,GTK_POS_RIGHT,1,1);
@@ -165,20 +157,19 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 
 	gtk_container_add(GTK_CONTAINER(subjects_window),content);
 	gtk_widget_show_all(subjects_window);
-
 }
 
 void del_dialog(GtkWidget* dialog, gpointer data) {
 	gtk_widget_destroy(dialog);
 }
+
 GtkWidget *dialog;
 void calculate_run(GtkWidget *button, gpointer data) {
 
 	float sum=0.0,total=0.0;
-	int n = no_of_papers[Dep][Sem],i;
-	int point_active[10];
+	int i, point_active[10];
 
-	for(i=0; i<n; i++) {
+	for(i=0; i<no_of_papers[Dep][Sem]; i++) {
 		switch( gtk_combo_box_get_active(GTK_COMBO_BOX(grade[i])) ) {
 			case 0: point_active[i] = 10; break;
 			case 1: point_active[i] = 9; break;
@@ -189,11 +180,9 @@ void calculate_run(GtkWidget *button, gpointer data) {
 			case 6: point_active[i] = 0; break;
 		}
 
-
 		total += ( (list[Dep][Sem][i].points) * (point_active[i]) );
 		sum += list[Dep][Sem][i].points;
 	}
-
 
 	dialog = gtk_message_dialog_new(GTK_WINDOW(subjects_window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
 			"Your GPA is %.3f !", total/sum);
@@ -205,7 +194,6 @@ void calculate_run(GtkWidget *button, gpointer data) {
 
 void about_dialog(GtkWidget *menuitem, gpointer data) {
 
-
 	dialog = gtk_message_dialog_new(GTK_WINDOW(window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
 			"GPA Calculator for Anna University U.G Courses\n\nVersion 0.2\n\nBy : Shanthakumar\n\nPlease report bugs to mail@shanth.tk\n\nTweet your feedback @5hanth\n");
 	gtk_window_set_title( GTK_WINDOW(dialog),"About");
@@ -214,7 +202,6 @@ void about_dialog(GtkWidget *menuitem, gpointer data) {
 }
 
 void license_dialog(GtkWidget *menuitem, gpointer data) {
-
 
 	dialog = gtk_message_dialog_new(GTK_WINDOW(window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
 			"\n\tThis program is a free software <www.fsf.org> ,\nyou can redistribute it and/or modify it as per your wish,\nprovided that you respect the freedom of others.\n\nThis program is distributed in the hope that it will be useful,\n but WITHOUT ANY WARRANTY; without even the implied warranty of \nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n");
