@@ -9,12 +9,15 @@ static void destroy( GtkWidget *widget,
 
 
 void show_subjects(GtkWidget* , GtkWidget** );
-void calculate_run(GtkWidget *, GtkWidget **);
+void calculate_run(GtkWidget *, gpointer);
+void about_dialog(GtkWidget *menuitem, gpointer data);
+void license_dialog(GtkWidget *menuitem, gpointer data);
 
 
+GtkWidget *window;
 int main(int argc, const char **argv)
 {
-	GtkWidget *window, *menubar,*submenu, *application, *about, *license, *department_list, *semester_list, *base, *list, *label_group, *list_group, *go, *align;
+	GtkWidget  *menubar,*submenu, *application, *about, *license, *department_list, *semester_list, *base, *list, *label_group, *list_group, *go, *align;
 	int i;
 	Department dep;
 	Semester sem;
@@ -34,8 +37,12 @@ int main(int argc, const char **argv)
 	application = gtk_menu_item_new_with_label("Application");
 	submenu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(application),(submenu));
+
 	about = gtk_menu_item_new_with_label("About");
+	g_signal_connect(about, "activate", G_CALLBACK(about_dialog),NULL);
+
 	license = gtk_menu_item_new_with_label("License");
+	g_signal_connect(license, "activate", G_CALLBACK(license_dialog),NULL);
 
 	gtk_menu_attach( GTK_MENU(gtk_menu_item_get_submenu(GTK_MENU_ITEM(application))),about,0,1,0,1);
 	gtk_menu_attach( GTK_MENU(gtk_menu_item_get_submenu(GTK_MENU_ITEM(application))),license,0,1,1,2);
@@ -161,7 +168,7 @@ void del_dialog(GtkWidget* dialog, gpointer data) {
 	gtk_widget_destroy(dialog);
 }
 GtkWidget *dialog;
-void calculate_run(GtkWidget *button, GtkWidget *g[]) {
+void calculate_run(GtkWidget *button, gpointer data) {
 
 	float sum=0.0,total=0.0;
 	int n = no_of_papers[Dep][Sem],i;
@@ -192,5 +199,24 @@ void calculate_run(GtkWidget *button, GtkWidget *g[]) {
 	gtk_dialog_run( GTK_DIALOG(dialog) );
 }
 
+void about_dialog(GtkWidget *menuitem, gpointer data) {
+
+
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
+			"GPA Calculator for Anna University U.G Courses\n\nVersion 0.2\n\nBy : Shanthakumar\n\nPlease report bugs to mail@shanth.tk\n\nTweet your feedback @5hanth\n");
+	gtk_window_set_title( GTK_WINDOW(dialog),"About");
+	g_signal_connect(dialog, "response", G_CALLBACK(del_dialog),NULL);
+	gtk_dialog_run( GTK_DIALOG(dialog) );
+}
+
+void license_dialog(GtkWidget *menuitem, gpointer data) {
+
+
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
+			"\n\tThis program is a free software <www.fsf.org> ,\nyou can redistribute it and/or modify it as per your wish,\nprovided that you respect the freedom of others.\n\nThis program is distributed in the hope that it will be useful,\n but WITHOUT ANY WARRANTY; without even the implied warranty of \nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n");
+	gtk_window_set_title( GTK_WINDOW(dialog),"License Notice");
+	g_signal_connect(dialog, "response", G_CALLBACK(del_dialog),NULL);
+	gtk_dialog_run( GTK_DIALOG(dialog) );
+}
 
 

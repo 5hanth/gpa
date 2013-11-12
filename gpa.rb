@@ -561,7 +561,7 @@ GPA Calculator for Anna University U.G Courses
 
 Version 0.1
 
-By : ShanthaKumar
+By : Shanthakumar
 
 Please report bugs to mail@shanth.tk
 
@@ -588,7 +588,6 @@ provided that you respect the freedom of others.
 
 	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-- ShanthaKumar
 """
 license_dialog = Gtk::MessageDialog.new(window,
 				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
