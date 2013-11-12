@@ -499,7 +499,7 @@ $semester[dep][sem].keys.each do |blah|
 	subjects.pack_start(Gtk::Label.new(blah), true, true, 0)
 	credits.pack_start(Gtk::Label.new(($semester[dep][sem][blah]).to_s), true, true, 0)
 	grade[blah] = Gtk::ComboBox.new
-	["S","A","B","C","D","E"].each do |yeah|
+	["S","A","B","C","D","E","U"].each do |yeah|
  	grade[blah].append_text yeah
 	end
 	grade[blah].active = 0
@@ -528,6 +528,7 @@ case grade[damn].active_text
                  when 'D'  then  points[damn]= 6
                  when 'E'  then  points[damn]= 5
                  when 'S'  then  points[damn]= 10
+                 when 'U'  then  points[damn]= 0
 		 end
 	end
                            
@@ -565,7 +566,7 @@ By : ShanthaKumar
 Please report bugs to mail@shanth.tk
 
 Tweet your feedback @5hanth
-""" # wanna change this ? I 'd be pleased if you give my credits in your modified version of this app.
+""" 
 
 about_dialog = Gtk::MessageDialog.new(window,
 				      Gtk::MessageDialog::DESTROY_WITH_PARENT,
