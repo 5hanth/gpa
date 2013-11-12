@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+#include <stdlib.h>
 #include "points.h"
 static void destroy( GtkWidget *widget,
 		gpointer   data )
@@ -8,6 +9,8 @@ static void destroy( GtkWidget *widget,
 
 
 void show_subjects(GtkWidget* , GtkWidget** );
+void calculate_run(GtkWidget *, GtkWidget **);
+
 
 int main(int argc, const char **argv)
 {
@@ -67,7 +70,7 @@ int main(int argc, const char **argv)
 	active[0] = department_list;
 	active[1] = list;
 	go = gtk_button_new_with_label("Go");
-		g_signal_connect(go,"clicked", G_CALLBACK(show_subjects),active );
+	g_signal_connect(go,"clicked", G_CALLBACK(show_subjects),active );
 
 	align = gtk_alignment_new(1,1,0,0);
 	gtk_alignment_set_padding(GTK_ALIGNMENT(align),0,10,0,10);
@@ -78,8 +81,6 @@ int main(int argc, const char **argv)
 	gtk_box_pack_start(GTK_BOX(semester_list), gtk_separator_new(GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(semester_list), list_group, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(semester_list), gtk_separator_new(GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
-	gtk_widget_show_all(semester_list);
-
 
 	gtk_box_pack_start(GTK_BOX(base), menubar, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(base), gtk_image_new_from_file("logo.png"), FALSE, FALSE, 0);
@@ -96,12 +97,15 @@ int main(int argc, const char **argv)
 	return 0;
 }
 
+gint Dep,Sem;
+GtkWidget *subjects_window;
+GtkWidget *grade[10];
 void show_subjects(GtkWidget* button, GtkWidget **data) {
-	GtkWidget *subjects_window, *content, *subjects, *credits, *grades, *calculate_button, *calculate;
-	GtkWidget *grade[10];
+	GtkWidget  *content, *subjects, *credits, *grades, *calculate_button, *calculate;
 	gchar *grade_list[] = { "S","A","B","C","D","E","U" };
 	gint p,i;
-	gint dep = gtk_combo_box_get_active(GTK_COMBO_BOX(data[0])), sem = gtk_combo_box_get_active(GTK_COMBO_BOX(data[1])) ;
+	Dep = gtk_combo_box_get_active(GTK_COMBO_BOX(data[0]));
+	Sem = gtk_combo_box_get_active(GTK_COMBO_BOX(data[1])) ;
 
 	subjects_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_container_set_border_width(GTK_CONTAINER(subjects_window),20);
@@ -122,11 +126,11 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	grades = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
 	gtk_box_pack_start(GTK_BOX(grades),gtk_label_new("Grade"), TRUE, TRUE, 15);
 
-	for(p = 0; p<no_of_papers[dep][sem]; p++) {
-		gtk_box_pack_start(GTK_BOX(subjects), gtk_label_new(list[dep][sem][p].paper), TRUE, TRUE, 0);
+	for(p = 0; p<no_of_papers[Dep][Sem]; p++) {
+		gtk_box_pack_start(GTK_BOX(subjects), gtk_label_new(list[Dep][Sem][p].paper), TRUE, TRUE, 0);
 		gtk_box_pack_start(GTK_BOX(credits), 
 				gtk_label_new(
-					g_strdup_printf("%d",list[dep][sem][p].points)), TRUE, TRUE, 0);
+					g_strdup_printf("%d",list[Dep][Sem][p].points)), TRUE, TRUE, 0);
 
 		grade[p] = gtk_combo_box_text_new();
 
@@ -142,6 +146,7 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	gtk_grid_attach_next_to(GTK_GRID(content),grades,NULL,GTK_POS_RIGHT,1,1);
 
 	calculate_button = gtk_button_new_with_label("Calculate GPA");
+	g_signal_connect(calculate_button,"clicked",G_CALLBACK(calculate_run),NULL);
 	calculate = gtk_alignment_new(1,1,0,0);
 	gtk_container_add(GTK_CONTAINER(calculate),calculate_button);
 
@@ -151,3 +156,41 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	gtk_widget_show_all(subjects_window);
 
 }
+
+void del_dialog(GtkWidget* dialog, gpointer data) {
+	gtk_widget_destroy(dialog);
+}
+GtkWidget *dialog;
+void calculate_run(GtkWidget *button, GtkWidget *g[]) {
+
+	float sum=0.0,total=0.0;
+	int n = no_of_papers[Dep][Sem],i;
+	int point_active[10];
+
+	for(i=0; i<n; i++) {
+		switch( (int)gtk_combo_box_get_active(GTK_COMBO_BOX(grade[i])) ) {
+			case 0: point_active[i] = 10.0; break;
+			case 1: point_active[i] = 9; break;
+			case 2: point_active[i] = 8; break;
+			case 3: point_active[i] = 7; break;
+			case 4: point_active[i] = 6; break;
+			case 5: point_active[i] = 5; break;
+			case 6: point_active[i] = 0; break;
+		}
+
+
+		total += ( (list[Dep][Sem][i].points) * (point_active[i]) );
+		sum += list[Dep][Sem][i].points;
+	}
+
+
+	dialog = gtk_message_dialog_new(GTK_WINDOW(subjects_window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
+			"Your GPA is %f !", total/sum);
+
+	gtk_window_set_title( GTK_WINDOW(dialog),"Your GPA");
+	g_signal_connect(dialog, "response", G_CALLBACK(del_dialog),NULL);
+	gtk_dialog_run( GTK_DIALOG(dialog) );
+}
+
+
+
