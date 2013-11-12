@@ -17,11 +17,9 @@ For Ubuntu/Debian GNU/Linux users,
 
 	2) Now extract the downloaded .zip from github repo and double click gpa.rb  
 
-	Easy enough ?
 
-For Window$ users,
+For Windows users,
 
-	I don't know whether you could understand what I mean....
 
 	1) Download and install Ruby ( http://rubyinstaller.org/downloads/ )
 
@@ -34,8 +32,6 @@ For Window$ users,
 	3) Run gpa.rb file 
 
 	E:\gpacalc\> ruby gpa.rb
-
-	If this don't work, ask Google :P
 
 
 For Mac users,
