@@ -123,15 +123,19 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	gtk_window_set_resizable(GTK_WINDOW(subjects_window),FALSE);
 
 	content = gtk_grid_new();
-	// change col spacing
+	   gtk_grid_set_column_spacing(GTK_GRID(content),12);
+	   gtk_grid_set_column_spacing(GTK_GRID(content),12);
 
 	subjects = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	gtk_box_set_spacing(GTK_BOX(subjects),4);
 	gtk_box_pack_start(GTK_BOX(subjects),gtk_label_new("Subject"), TRUE, TRUE, 10);
 	credits = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	gtk_box_set_spacing(GTK_BOX(credits),4);
 	gtk_box_pack_start(GTK_BOX(credits),gtk_label_new("Credits"), TRUE, TRUE, 10);
 
 	grades = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
-	gtk_box_pack_start(GTK_BOX(grades),gtk_label_new("Grade"), TRUE, TRUE, 15);
+	gtk_box_set_spacing(GTK_BOX(grades),0);
+	gtk_box_pack_start(GTK_BOX(grades),gtk_label_new("Grade"), TRUE, TRUE, 16.5);
 
 	for(p = 0; p<no_of_papers[Dep][Sem]; p++) {
 		gtk_box_pack_start(GTK_BOX(subjects), gtk_label_new(list[Dep][Sem][p].paper), TRUE, TRUE, 0);
@@ -175,8 +179,8 @@ void calculate_run(GtkWidget *button, gpointer data) {
 	int point_active[10];
 
 	for(i=0; i<n; i++) {
-		switch( (int)gtk_combo_box_get_active(GTK_COMBO_BOX(grade[i])) ) {
-			case 0: point_active[i] = 10.0; break;
+		switch( gtk_combo_box_get_active(GTK_COMBO_BOX(grade[i])) ) {
+			case 0: point_active[i] = 10; break;
 			case 1: point_active[i] = 9; break;
 			case 2: point_active[i] = 8; break;
 			case 3: point_active[i] = 7; break;
@@ -192,7 +196,7 @@ void calculate_run(GtkWidget *button, gpointer data) {
 
 
 	dialog = gtk_message_dialog_new(GTK_WINDOW(subjects_window),GTK_DIALOG_DESTROY_WITH_PARENT,GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
-			"Your GPA is %f !", total/sum);
+			"Your GPA is %.3f !", total/sum);
 
 	gtk_window_set_title( GTK_WINDOW(dialog),"Your GPA");
 	g_signal_connect(dialog, "response", G_CALLBACK(del_dialog),NULL);
