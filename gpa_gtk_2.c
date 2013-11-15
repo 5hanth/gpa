@@ -48,9 +48,9 @@ int main(int argc, char **argv)
 
 	gtk_combo_box_set_active(GTK_COMBO_BOX(department_list),0);
 
-	base = gtk_box_new(GTK_ORIENTATION_VERTICAL,10);
+	base = gtk_vbox_new(FALSE,10);
 
-	semester_list = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,10);
+	semester_list = gtk_hbox_new(FALSE,10);
 
 	list = gtk_combo_box_text_new();
 
@@ -59,8 +59,8 @@ int main(int argc, char **argv)
 
 	gtk_combo_box_set_active(GTK_COMBO_BOX(list),0);
 
-	label_group = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
-	list_group = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	label_group = gtk_vbox_new(FALSE,0);
+	list_group = gtk_vbox_new(FALSE,0);
 
 	gtk_box_pack_start(GTK_BOX(label_group), gtk_label_new("Department : "), TRUE, TRUE, 0 );
 	gtk_box_pack_start(GTK_BOX(label_group), gtk_label_new("Semester : "), TRUE, TRUE, 0 );
@@ -77,17 +77,17 @@ int main(int argc, char **argv)
 	gtk_alignment_set_padding(GTK_ALIGNMENT(align),0,10,0,10);
 	gtk_container_add(GTK_CONTAINER(align), go);
 
-	gtk_box_pack_start(GTK_BOX(semester_list), gtk_separator_new(GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(semester_list), gtk_vseparator_new(), FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(semester_list), label_group, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(semester_list), gtk_separator_new(GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(semester_list), gtk_vseparator_new(), FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(semester_list), list_group, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(semester_list), gtk_separator_new(GTK_ORIENTATION_VERTICAL), FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(semester_list), gtk_vseparator_new(), FALSE, FALSE, 0);
 
 	gtk_box_pack_start(GTK_BOX(base), menubar, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(base), gtk_image_new_from_file("logo.png"), FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(base), gtk_separator_new(GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(base), gtk_hseparator_new(), FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(base), semester_list, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(base), gtk_separator_new(GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(base), gtk_hseparator_new(), FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(base), align, FALSE, FALSE, 0);
 	gtk_widget_show_all(base);
 
@@ -115,20 +115,20 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 	gtk_window_set_title(GTK_WINDOW(subjects_window),"Choose Your Grade in each Subject: ");
 	gtk_window_set_resizable(GTK_WINDOW(subjects_window),FALSE);
 
-	content = gtk_grid_new();
-	gtk_grid_set_column_spacing(GTK_GRID(content),12);
-	gtk_grid_set_column_spacing(GTK_GRID(content),12);
+	content = gtk_table_new(2,3,FALSE);
+	gtk_table_set_col_spacings(GTK_TABLE(content),12);
+	gtk_table_set_col_spacings(GTK_TABLE(content),12);
 
-	subjects = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	subjects = gtk_vbox_new(FALSE,0);
 	gtk_box_set_spacing(GTK_BOX(subjects),4);
 	gtk_box_pack_start(GTK_BOX(subjects),gtk_label_new("Subject"), TRUE, TRUE, 10);
-	credits = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	credits = gtk_vbox_new(FALSE,0);
 	gtk_box_set_spacing(GTK_BOX(credits),4);
 	gtk_box_pack_start(GTK_BOX(credits),gtk_label_new("Credits"), TRUE, TRUE, 10);
 
-	grades = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	grades = gtk_vbox_new(FALSE,0);
 	gtk_box_set_spacing(GTK_BOX(grades),0);
-	gtk_box_pack_start(GTK_BOX(grades),gtk_label_new("Grade"), TRUE, TRUE, 16);
+	gtk_box_pack_start(GTK_BOX(grades),gtk_label_new("Grade"), TRUE, TRUE, 16.5);
 
 	for(p = 0; p<no_of_papers[Dep][Sem]; p++) {
 		gtk_box_pack_start(GTK_BOX(subjects), gtk_label_new(list[Dep][Sem][p].paper), TRUE, TRUE, 0);
@@ -141,19 +141,20 @@ void show_subjects(GtkWidget* button, GtkWidget **data) {
 			gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(grade[p]), grade_list[i]); 
 
 		gtk_combo_box_set_active(GTK_COMBO_BOX(grade[p]),0);
-		gtk_box_pack_start( GTK_BOX(grades), grade[p], TRUE, TRUE, 1);
+		gtk_box_pack_start( GTK_BOX(grades), grade[p], TRUE, TRUE, 3);
 	}
 
-	gtk_grid_attach_next_to(GTK_GRID(content),subjects,NULL,GTK_POS_RIGHT,1,1);
-	gtk_grid_attach_next_to(GTK_GRID(content),credits,NULL,GTK_POS_RIGHT,1,1);
-	gtk_grid_attach_next_to(GTK_GRID(content),grades,NULL,GTK_POS_RIGHT,1,1);
+	gtk_table_attach(GTK_TABLE(content),subjects,0,1,0,1,GTK_FILL,GTK_FILL,5,5);
+	gtk_table_attach(GTK_TABLE(content),credits,1,2,0,1,GTK_FILL,GTK_FILL,0,0);
+	gtk_table_attach(GTK_TABLE(content),grades,2,3,0,1,GTK_FILL,GTK_FILL,0,0);
 
 	calculate_button = gtk_button_new_with_label("Calculate GPA");
 	g_signal_connect(calculate_button,"clicked",G_CALLBACK(calculate_run),NULL);
 	calculate = gtk_alignment_new(1,1,0,0);
 	gtk_container_add(GTK_CONTAINER(calculate),calculate_button);
+	gtk_alignment_set_padding(GTK_ALIGNMENT(calculate),10,5,5,5);
 
-	gtk_grid_attach(GTK_GRID(content), calculate, 0,3,1,2);
+	gtk_table_attach(GTK_TABLE(content), calculate,0,3,1,2,GTK_FILL,GTK_FILL,0,0 );
 
 	gtk_container_add(GTK_CONTAINER(subjects_window),content);
 	gtk_widget_show_all(subjects_window);
